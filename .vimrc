@@ -17,7 +17,7 @@ set confirm
 set visualbell
 set t_vb=
 set mouse+=a
-set cmdheight=2
+set cmdheight=1
 set number
 set notimeout ttimeout ttimeoutlen=200
 set pastetoggle=<F11>
@@ -34,6 +34,10 @@ command TexPreamble r ~\.vim\preamble.txt
 command TexPDFV write | !pdflatex -synctex=1 -interaction=nonstopmode %:t && %:r.pdf
 let base16colorspace=256
 
+function! GitBranch()
+    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
 set statusline=
 set statusline+=%#WildMenu#
 set statusline+=\ [%{mode()}]\ 
@@ -45,8 +49,9 @@ set statusline+=%=
 set statusline+=%#StatusLineTerm#
 set statusline+=\ %y\  
 set statusline+=%#DiffDelete#
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-set statusline+=\ [%{&fileformat}\]\ 
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}\ 
+set statusline+=%#VertSplit#
+set statusline+=\ [%{GitBranch()}\]\ 
 set statusline+=%#ColorColumn#
 set statusline+=\ %p%%\ 
 set statusline+=%#DiffChange#
