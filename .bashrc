@@ -124,3 +124,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
         eval "$("$BASE16_SHELL/profile_helper.sh")"
 
+alias gitlog='git log --stat --graph'
+alias cdadir='cd /mnt/a'
+alias cdcdir='cd /mnt/c/Users/augusto'
