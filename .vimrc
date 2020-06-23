@@ -10,6 +10,8 @@ set ignorecase
 set smartcase
 set backspace=indent,eol,start
 set autoindent
+set smartindent
+set cindent
 set nostartofline
 set ruler
 set laststatus=2
@@ -26,23 +28,22 @@ set softtabstop=4
 set expandtab
 set path+=**
 set fileencoding=utf-8
+
 command TexPDF write | silent !pdflatex -synctex=1 -interaction=nonstopmode %:t && %:r.pdf
-command PyRun write | !py %
-command CRun write | !gcc -Wall -o %:r %:t | !./%:r
+command PyRun write | !python3 %:t
+command CRun write | !clear; gcc -std=c11 -Wall %:t -o %:r; ./%:r 
 command TexSection r ~\.vim\section.txt
 command TexPreamble r ~\.vim\preamble.txt
 command TexPDFV write | !pdflatex -synctex=1 -interaction=nonstopmode %:t && %:r.pdf
-let base16colorspace=256
+command CMain wa | !clear; gcc -stc=c11 -Wall main.c -o main; ./main 
 
-function! GitBranch()
-    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
+let base16colorspace=256
 
 set statusline=
 set statusline+=%#WildMenu#
 set statusline+=\ [%{mode()}]\ 
-set statusline+=%#SpellLocal#
-set statusline+=\ %F\ 
+set statusline+=%#DiffAdd#
+set statusline+=\ %f\ 
 set statusline+=%#StatusLineNC#
 set statusline+=%m%r\ 
 set statusline+=%=
@@ -50,9 +51,9 @@ set statusline+=%#StatusLineTerm#
 set statusline+=\ %y\  
 set statusline+=%#DiffDelete#
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}\ 
-set statusline+=%#VertSplit#
-set statusline+=\ [%{GitBranch()}\]\ 
 set statusline+=%#ColorColumn#
 set statusline+=\ %p%%\ 
 set statusline+=%#DiffChange#
 set statusline+=\ %l/%L:%c\ 
+
+hi MatchParen term=bold ctermfg=6 ctermbg=0
