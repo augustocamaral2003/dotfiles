@@ -1,0 +1,26 @@
+#!/bin/bash
+
+DATE=$(date '+%A, %d de %B de %Y. %H:%M')
+MINUTO=$(date '+%M')
+UPTIME=$(uptime -p | cut -b 4- | sed -e 's/hour/hora/g' -e 's/minute/minuto/g')
+BATTERY=$(cat /sys/class/power_supply/BAT0/capacity)
+BATTPC=$(( ${BATTERY} / 10 ))
+WEATHER=$(curl -s wttr.in/Taubaté\?format\="%t%o&period=60")
+
+for (( i=0; i < 10; i++ ))
+do
+    if [ "$i" -lt "$BATTPC" ]; then
+        CHAR="#"
+    else
+        CHAR="."
+    fi
+    BATTDRAW="${BATTDRAW}${CHAR}"
+done
+
+clear
+
+echo -e "\e[1m[DATE]: \e[38;5;200m${DATE}\e[0m"
+echo -e "\e[1m[UPTM]: \e[38;5;9m${UPTIME}\e[0m"
+echo -e "\e[1m[BATT]: \e[38;5;226m[${BATTDRAW}] ${BATTERY}%\e[0m"
+echo -e "\e[1m[USER]: \e[38;5;69m$(whoami)\e[0m"
+echo -e "\e[1m[WTHR]: \e[38;5;91m${WEATHER}\e[0m"
