@@ -164,7 +164,7 @@ function parse_git_dirty {
 	fi
 }
 
-export PS1="\[\e[38;5;10;1m\][\u]\[\e[0m\]\[\e[38;5;199m\]\`parse_git_branch\`\[\e[0m\][\[\e[38;5;51;48;5;234;3m\]\w\[\e[0m\]]\[\e[38;5;184;48;5;0m\]$ \[\e[0m\]"
+export PS1="\[\e[38;5;10;1m\][\u]\[\e[0m\]\[\e[38;5;199m\]\`parse_git_branch\`\[\e[0m\][\[\e[38;5;51;48;5;234;3m\]\w\[\e[0m\]]\[\e[38;5;184;48;5;0m\]$\[\e[0m\] "
 
 BASE16_SHELL="$HOME/.config/base16-shell/"
 [ -n "$PS1" ] && \
