@@ -12,6 +12,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 if [ -d "$BASE16_SHELL" ]; then
     echo "Themes already installed"
 else
+    mkdir ~/.config
     git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
     [ -n "$PS1" ] && \
         [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
