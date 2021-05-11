@@ -29,31 +29,26 @@ set expandtab
 set path+=**
 set fileencoding=utf-8
 
-command TexPDF write | silent !pdflatex -synctex=1 -interaction=nonstopmode %:t && %:r.pdf
 command PyRun write | !python3 %:t
 command CRun write | !clear; gcc -std=c11 -Wall %:t -o %:r -lm; ./%:r 
-command TexSection r ~\.vim\section.txt
-command TexPreamble r ~\.vim\preamble.txt
-command TexPDFV write | !pdflatex -synctex=1 -interaction=nonstopmode %:t && %:r.pdf
-command CMain wa | !clear; gcc -stc=c11 -Wall main.c -o main; ./main 
 
 let base16colorspace=256
 
 set statusline=
 set statusline+=%#WildMenu#
 set statusline+=\ [%{mode()}]\ 
-set statusline+=%#DiffAdd#
+set statusline+=%#VertSplit#
 set statusline+=\ %f\ 
-set statusline+=%#StatusLineNC#
+set statusline+=%#VertSplit#
 set statusline+=%m%r\ 
 set statusline+=%=
-set statusline+=%#StatusLineTerm#
+set statusline+=%#VertSplit#
 set statusline+=\ %y\  
-set statusline+=%#DiffDelete#
+set statusline+=%#WildMenu#
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}\ 
-set statusline+=%#ColorColumn#
+set statusline+=%#VertSplit#
 set statusline+=\ %p%%\ 
-set statusline+=%#DiffChange#
+set statusline+=%#WildMenu#
 set statusline+=\ %l/%L:%c\ 
 
 hi MatchParen term=bold ctermfg=6 ctermbg=0
